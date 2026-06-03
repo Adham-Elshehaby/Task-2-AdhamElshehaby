@@ -1,0 +1,36 @@
+#importing necessary libraries for the project.
+from sklearn.datasets import load_iris
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+#loads the iris dataset, I chose the iris dataset because it is a commonly used and easy to understand small dataset.
+iris = load_iris()
+
+#creates a dataframe containing the iris data as the rows, and the feature names as the columns, and prints the first 5 rows, and the shape of the dataframe
+dataFrame = pd.DataFrame(iris.data, columns=iris.feature_names)
+print(dataFrame.head())
+print(dataFrame.shape)
+
+#splits the data into training and testing sets.
+X = iris.data
+Y = iris.target
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+
+#I decided to use the K-nearest neighbors algorithm because it is a simple and effective classification algorithm.
+model = KNeighborsClassifier(n_neighbors=3)
+model.fit(X_train,Y_train)
+
+#makes predictions using the model.
+predictions = model.predict(X_test)
+print(predictions)
+
+#evaluates the accuracy of the model.
+print(accuracy_score(Y_test, predictions)*100, "%")
+
+
+
+
+
+
